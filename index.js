@@ -1,52 +1,38 @@
+//import an express module
 const express = require("express");
-
-const app = express();
 const port = 4000;
-app.get("/", (req, res) => {
-  res.send("server started");
+
+//create an instance of the express application
+const app = express();
+
+//define a route mechanism
+app.get("/all", (req, res) => {
+  res.send("Hello Buddy.Welcome to express Server");
 });
 
-app.route("/user").get((req, res) => {
-  res.send("user data are here");
+app.get("/users", (req, res) => {
+  res.send("Users listed here");
 });
 
+//creater a router for user
+
+app.route("/users").get((req, res) => {
+  res.send("User are listed here");
+});
+
+app.route("/students").get((req, res) => {
+  res.send("Students are listed here");
+});
+
+//post
+app.post("/", (req, res) => {
+  console.log(req.body);
+  res.send({
+    status: 200,
+    message: "Data Send successfully",
+  });
+});
+//Start the server and listen to a port number
 app.listen(port, () => {
-  console.log(`server is running at : ${port}`);
-});
-
-let details = [
-  {
-    id: 1,
-    name: "Abhijeet",
-    email: "abhijeet@gmail.com",
-  },
-  {
-    id: 2,
-    name: "Pardeep",
-    email: "pardeep@gmail.com",
-  },
-  {
-    id: 3,
-    name: "Rajshekar Buddha",
-    email: "buddha@gmail.com",
-  },
-  {
-    id: 4,
-    name: "Amir",
-    email: "amir@gmail.com",
-  },
-  {
-    id: 5,
-    name: "Leonard",
-    email: "leonard@gmail.com",
-  },
-  {
-    id: 6,
-    name: "Shivam",
-    email: "Shivam@gmail.com",
-  },
-];
-
-app.route("/student").get((req, res) => {
-  res.send(details);
+  console.log("Server is running on port :" + port);
 });
